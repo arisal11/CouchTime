@@ -144,3 +144,81 @@
     width: 30px;
     margin: 10px;
 }
+
+/*Villian*/
+
+/* Form Container */
+.video-form {
+    background: var(--backgroundColor);
+    border-radius: 12px;
+    padding: 20px;
+    width: 360px;
+    margin: 40px auto;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    grid-area: main;
+  }
+  
+  /* Title Label */
+  .form-title {
+    display: block;
+    font-size: 16px;
+    color: #cfe7ff;
+    margin-bottom: 12px;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  /* Input Wrapper */
+  .input-wrapper {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    background: #0b0e18;
+    border-radius: 8px;
+    padding: 6px;
+    border: 1px solid #2e3448;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .input-wrapper:focus-within {
+    border-color: var(--backgroundColor);
+    box-shadow: 0 0 8px rgba(124, 58, 237, 0.5);
+  }
+  
+  /* Input Field */
+  .video-input {
+    flex: 1;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+  }
+  
+  .video-input::placeholder {
+    color: var(--textColor);
+  }
+  
+  /* Send Button */
+  .send-button {
+    padding: 10px 16px;
+    background: var(--backgroundColor);
+    border: none;
+    color: white;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+  
+  .send-button:hover {
+    background: var(--backgroundColor);
+    transform: translateY(-1px);
+  }
+  
+  .send-button:active {
+    transform: translateY(1px);
+  }
+  
