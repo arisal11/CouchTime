@@ -5,9 +5,7 @@ import Hero from '../components/Hero';
 function Add(){
     return (
         <>
-        <Header /> 
         <Hero />
-        <Footer />
         </>
     );
 }

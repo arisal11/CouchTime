@@ -6,9 +6,7 @@ import Villian from '../components/Villian';
 function Host(){
     return (
         <>
-        <Header /> 
         <Villian />
-        <Footer />
         </>
     );
 }

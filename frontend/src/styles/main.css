@@ -1,7 +1,52 @@
 :root{
     --backgroundColor: #d2b48c;
+    --textColor: white;
 }
 
+
+/* Home */
+
+.Info{
+    grid-area: main;
+    text-align: center;
+}
+
+.Info > *{
+    color: var(--textColor);
+}
+
+.carousel {
+    width: 800px;
+    height: 400px;
+    border-radius: 10px;
+    margin-top: 40px;
+    justify-self: center;
+}
+
+.carousel-image-wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 1s ease-in-out;
+}
+
+/* Fading Animations */
+.fade-in {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Main Style */
 .head{
     display: flex;
     flex-direction: row;
@@ -9,10 +54,30 @@
     align-items: center;
     gap: 0.5rem;
     padding: 10px;
-    margin-bottom: 1rem;
     top: 0;
     grid-area: head;
     background-color: var(--backgroundColor);
+    font-size: large;
+}
+
+.head-button{
+    padding: 10px;
+    background: none;
+    border: none;
+    color: var(--textColor);
+}
+
+.head-button:hover{
+    background-color: white;
+    color: var(--backgroundColor);
+    border-radius: 8px;
+}
+
+.home-icon{
+    background: transparent;
+    width: 50px;
+    height: 40px;
+    margin: 10px;
 }
 
 .footer{
@@ -27,7 +92,7 @@
     grid-area: foot;
 }
 
-.index-container{
+#root{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 10% 80% 10%;
@@ -93,9 +158,8 @@
   }
   
 
-/*Cabinet*/
   .cabinet {
-    background: #8b4513; /* wood color */
+    background: #8b4513; 
     width: 500px;
     height: 120px;
     margin-top: 20px;
@@ -129,25 +193,20 @@
   }
   
   .left-door::before {
-    right: 8px; /* Handle placement */
+    right: 8px; 
   }
   
   .right-door::before {
-    left: 8px; /* Handle placement */
+    left: 8px; 
   }
 
 .hero-main{
     grid-area: main;
 }
 
-.home-icon{
-    width: 30px;
-    margin: 10px;
-}
 
 /*Villian*/
 
-/* Form Container */
 .video-form {
     background: var(--backgroundColor);
     border-radius: 12px;
@@ -159,7 +218,6 @@
     grid-area: main;
   }
   
-  /* Title Label */
   .form-title {
     display: block;
     font-size: 16px;
@@ -169,7 +227,6 @@
     font-weight: bold;
   }
   
-  /* Input Wrapper */
   .input-wrapper {
     display: flex;
     gap: 8px;
@@ -183,10 +240,9 @@
   
   .input-wrapper:focus-within {
     border-color: var(--backgroundColor);
-    box-shadow: 0 0 8px rgba(124, 58, 237, 0.5);
+    box-shadow: 0 0 8px var(--backgroundColor);
   }
   
-  /* Input Field */
   .video-input {
     flex: 1;
     padding: 10px;
@@ -201,7 +257,6 @@
     color: var(--textColor);
   }
   
-  /* Send Button */
   .send-button {
     padding: 10px 16px;
     background: var(--backgroundColor);
