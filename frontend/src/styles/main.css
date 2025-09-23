@@ -204,6 +204,55 @@
     grid-area: main;
 }
 
+/* Create Form */
+
+.create-form{
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  color: var(--textColor);
+  background: var(--backgroundColor);
+  border-radius: 12px;
+  padding: 20px;
+  width: 360px;
+  margin: 40px auto;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.info-cont{
+  text-align: center;
+}
+
+form{ 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+form > *{
+  margin: 5px;
+}
+
+/* Join Form */
+
+.join-form{
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  color: var(--textColor);
+  background: var(--backgroundColor);
+  border-radius: 12px;
+  padding: 20px;
+  width: 360px;
+  margin: 40px auto;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
 
 /*Villian*/
 
@@ -221,7 +270,7 @@
   .form-title {
     display: block;
     font-size: 16px;
-    color: #cfe7ff;
+    color: var(--textColor);
     margin-bottom: 12px;
     text-align: center;
     font-weight: bold;
@@ -233,7 +282,6 @@
     align-items: center;
     background: #0b0e18;
     border-radius: 8px;
-    padding: 6px;
     border: 1px solid #2e3448;
     transition: border 0.3s ease, box-shadow 0.3s ease;
   }
@@ -243,7 +291,7 @@
     box-shadow: 0 0 8px var(--backgroundColor);
   }
   
-  .video-input {
+  .input {
     flex: 1;
     padding: 10px;
     background: transparent;
@@ -253,11 +301,11 @@
     outline: none;
   }
   
-  .video-input::placeholder {
+  .input::placeholder {
     color: var(--textColor);
   }
   
-  .send-button {
+  .button {
     padding: 10px 16px;
     background: var(--backgroundColor);
     border: none;
@@ -265,15 +313,10 @@
     border-radius: 6px;
     font-weight: bold;
     cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
   }
   
-  .send-button:hover {
-    background: var(--backgroundColor);
-    transform: translateY(-1px);
-  }
-  
-  .send-button:active {
-    transform: translateY(1px);
+  .button:hover {
+    background: white;
+    color: var(--backgroundColor);
   }
   

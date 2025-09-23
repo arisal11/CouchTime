@@ -16,6 +16,7 @@ function App() {
         <Route path="/host" element={<Host />}></Route>
         <Route path="/add" element={<Add />}></Route>
         <Route path="/about" element={<About />}></Route>
+        <Route path="/host:id"></Route>
       </Routes>
       <Foot />
     </Router>

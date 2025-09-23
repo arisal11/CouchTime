@@ -8,10 +8,10 @@ function Villian() {
           <input
             id="video-url"
             type="text"
-            className="video-input" 
+            className="input" 
             placeholder="Paste YouTube link here..."
           />
-          <button className="send-button">Send</button>
+          <button className="button">Send</button>
         </div>
       </div>
     );
