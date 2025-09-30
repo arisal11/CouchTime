@@ -1,6 +1,21 @@
+import { useNavigate } from "react-router-dom";
 
 
 function Create (){
+
+    const navigate = useNavigate();
+
+    const handleRoomCreate = async () =>{
+        const res = await fetch("http://localhost:5001/create-room", {
+            method: "POST",
+            credentials: "include"
+        });
+
+        const data = await res.json();
+        console.log(data.roomId)
+        navigate(`/host/${data.roomId}`)
+    }
+
     return (
         <>
         <div className="create-form">
@@ -8,22 +23,10 @@ function Create (){
                 <h4> Room Creation! </h4>
                 <p>Create a room for your <br></br>friends to start sharing!</p>
             </div>
-
             <div className="form-cont">
-                <form>
-                        <label> Create Room Password: </label> <br/>
-                        <div className="input-wrapper">
-                            <input
-                                type="text"
-                                name="password"
-                                className="input"
-                                required
-                            />
-                        </div>
-                    <button type="submit" className="button">
-                        Submit
+                    <button type="submit" className="button" onClick={handleRoomCreate}>
+                        Create Room
                     </button>
-                </form>
             </div>
         </div>
         </>

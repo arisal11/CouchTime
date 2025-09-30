@@ -10,6 +10,7 @@ function Home(){
     ];
 
     const [currentIndex, setCurrentIndex] = useState(0);
+   
     const [fade, setFade] = useState(true);
 
     useEffect(() => {
@@ -26,6 +27,8 @@ function Home(){
     
         return () => clearInterval(timer);
     }, [images.length]);
+
+
     
     return(
         <>
