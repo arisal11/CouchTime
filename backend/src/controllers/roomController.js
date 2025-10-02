@@ -2,32 +2,35 @@ const Room = require("../models/room.js");
 const Video = require("../models/videos.js");
 
 exports.createRoom = async (req, res) => {
-
-    if(!req.session.userId){
-        return res.status(401).json({error: "No session"})
+    try {
+        if (!req.session.userId) {
+            req.session.userId = Math.random().toString(36).substring(2, 12);
+        }
+    
+        const newRoom = new Room({
+            createdBy: req.body.name
+        });
+    
+        await newRoom.save();
+    
+        req.session.roomID = newRoom._id;
+    
+        res.json({ roomId: newRoom._id });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to create room" });
     }
-
-    const roomId = Math.random().toString(36).substring(2,8);
-
-    const newRoom = new Room ({
-        roomId,
-        hostSessionId: req.session.userId
-    });
-
-    await newRoom.save();
-
-    req.session.roomId = roomId;
-
-    res.json({roomId});
 }
 
 exports.getRoom = async (req, res) => {
-    const { roomId } = req.params;
+    try {
+        const room = await Room.findById(req.params.id);
+        if(!room){
+            return res.status(404).json({error: "room not found"});
+        }
 
-    const room = await Room.findOne({ roomId });
-    if (!room) return res.status(404).json({ error: "Room not found" });
-
-    const videos = await Video.find({ roomId });
-
-    res.json({ room, videos });
+        res.json({room})
+    } catch (error) {
+        res.status(400).json({error:"Invalid room id"})
+    }
 };

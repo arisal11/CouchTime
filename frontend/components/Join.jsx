@@ -3,7 +3,7 @@
 function Join (){
     return (
         <>
-        <div className="join-form">
+        <div className="forms">
             <div className="info-cont">
                 <h4> Join a room! </h4>
                 <p>Join a room that your friend <br></br> created to start sharing!</p>

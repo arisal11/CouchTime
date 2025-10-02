@@ -23,7 +23,7 @@ mongoose.connect(process.env.MONGO_URL)
 app.use(session({ 
   secret: "nfeiwofnieownfiow",
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true,
   cookie: {
     maxAge: 86400, 
     httpOnly: true,
@@ -32,16 +32,8 @@ app.use(session({
   store: MongoStore.create({ mongoUrl: process.env.MONGO_URL })
 }))
 
-app.get("/session", (req, res) =>{
-  if(!req.session.userId){
-    req.session.userId = Date.now()
-  }
-  console.log(req.session.userId)
-  res.json({sessionId: req.session.userId})
-})
 
-
-app.use("/api/rooms", roomRoutes);
+app.use("/host", roomRoutes);
 app.use("/api/videos", videoRoutes);
 
 const PORT = process.env.PORT || 5000;
