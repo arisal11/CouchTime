@@ -2,28 +2,33 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 
-function Create (){
+function Create ({setRoomToken}){
     const [name, setName] = useState("");
     const navigate = useNavigate();
 
-    const handleRoomCreate = async () =>{
-        try {
-            const res = await fetch("http://localhost:5001/host", {
-                method: "POST",
-                credentials: "include", 
-                headers: {
-                "Content-Type": "application/json",
-            },
-                body: JSON.stringify({ name: "My Room" }), 
-            });
-        
-            if (!res.ok) {
-                throw new Error(`Request failed: ${res.status}`);
-            }
-        
-            const data = await res.json();
-            console.log("Created room:", data);
-            navigate(`/host/${data.roomId}`)
+    const handleRoomCreate = async (e) =>{
+        e.preventDefault();
+    try {
+        const res = await fetch("http://localhost:5001/host", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name }),
+        });
+
+        if (!res.ok) throw new Error(`Request failed: ${res.status}`);
+
+        const data = await res.json();
+        const rmToken = data.roomID;
+
+        setRoomToken(rmToken);
+
+        localStorage.setItem(
+        "roomData",
+        JSON.stringify({ roomToken: rmToken, createdAt: Date.now() })
+        );
+
+            navigate(`/host/${data.roomID}`)
             } catch (err) {
             console.error(err);
             }

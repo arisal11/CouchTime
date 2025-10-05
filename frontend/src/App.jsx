@@ -9,14 +9,17 @@ import Foot from '../components/Footer.jsx'
 import Hero from "../components/Hero.jsx";
 
 function App() {
+  const [roomToken, setRoomToken] = useState(
+    localStorage.getItem("roomToken") || ""
+  );
   return (
     <>
     <Router>
-      <Head />
+      <Head roomToken = {roomToken} />
       <Routes>
         <Route path="/" element={<Home />}></Route>
-        <Route path="/host" element={<Host />}></Route>
-        <Route path="/add" element={<Add />}></Route>
+        <Route path="/host" element={<Host setRoomToken={setRoomToken}/>}></Route>
+        <Route path="/add" element={<Add setRoomToken={roomToken}/>}></Route>
         <Route path="/about" element={<About />}></Route>
         <Route path="/host/:id" element={<Hero />}></Route>
       </Routes>

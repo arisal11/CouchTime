@@ -1,5 +1,6 @@
 import '../src/styles/main.css'
 
+
 function Hero(){
     return (
         <>

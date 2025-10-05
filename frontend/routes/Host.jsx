@@ -4,10 +4,10 @@ import Hero from '../components/Hero';
 import Villian from '../components/Villian';
 import Create from '../components/Create';
 
-function Host(){
+function Host({setRoomToken}){
     return (
         <>
-        <Create />
+        <Create setRoomToken={setRoomToken}/>
         </>
     );
 }
