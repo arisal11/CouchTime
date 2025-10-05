@@ -5,7 +5,11 @@ function Header({roomToken}){
     return (
         <header className="head">
             <Link to ="/"><img src="./images/home-icon.png" alt="Home" className='home-icon' /></Link>
-            <Link to ="/host"><button className='head-button'>Host</button></Link>
+            {roomToken ? (
+            <Link to={`/host?id=${roomToken}`}><button className='head-button'>Host</button></Link>
+            ) : (
+                <Link to ="/host"><button className='head-button'>Host</button></Link>
+            )}
             {roomToken && (
             <Link to={`/add?room=${roomToken}`}><button className='head-button'>Add</button></Link>
             )}
