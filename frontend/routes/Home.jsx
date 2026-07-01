@@ -1,49 +1,82 @@
-import { useState, useEffect } from 'react';
-import '../src/styles/main.css'
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { socket } from "../src/socket.js";
 
-function Home(){
+function Home() {
+  const navigate = useNavigate();
+  const [code, setCode] = useState("");
+  const [error, setError] = useState("");
+  const [creating, setCreating] = useState(false);
 
-    const images = [
-        './images/people-image.jpg',
-        './images/people-image2.jpg',
-        './images/people-image3.jpg'
-    ];
+  const handleHost = () => {
+    setCreating(true);
+    setError("");
+    socket.emit("host:create", {}, (res) => {
+      setCreating(false);
+      if (res?.ok) {
+        navigate(`/host/${res.code}`);
+      } else {
+        setError("Couldn't create a room. Is the server running?");
+      }
+    });
+  };
 
-    const [currentIndex, setCurrentIndex] = useState(0);
-   
-    const [fade, setFade] = useState(true);
+  const handleJoin = (e) => {
+    e.preventDefault();
+    const clean = code.trim().toUpperCase();
+    if (!clean) return;
+    setError("");
+    // Verify the room exists before navigating.
+    socket.emit("room:join", { code: clean, name: "Guest" }, (res) => {
+      if (res?.ok) {
+        navigate(`/room/${clean}`);
+      } else {
+        setError("No room with that code. Double-check and try again.");
+      }
+    });
+  };
 
-    useEffect(() => {
-        const timer = setInterval(() => {
-        setFade(false); 
-    
-        setTimeout(() => {
-            setCurrentIndex((prevIndex) =>
-            prevIndex === images.length - 1 ? 0 : prevIndex + 1
-            );
-            setFade(true); 
-            }, 500); 
-        }, 5000); 
-    
-        return () => clearInterval(timer);
-    }, [images.length]);
+  return (
+    <div className="home">
+      <section className="hero-copy">
+        <h1>Gather your friends and watch together</h1>
+        <p>
+          Host a room on your TV, then everyone drops YouTube links from their
+          phone into a shared queue. CouchTime plays them back-to-back on the
+          big screen.
+        </p>
+      </section>
 
+      <div className="home-cards">
+        <div className="card card-host">
+          <div className="card-icon">📺</div>
+          <h2>Host a room</h2>
+          <p>Open this on the screen everyone can see — your TV, laptop or monitor.</p>
+          <button className="btn btn-primary" onClick={handleHost} disabled={creating}>
+            {creating ? "Creating…" : "Start hosting"}
+          </button>
+        </div>
 
-    
-    return(
-        <>
-            <div className="Info">
-                <h1> Gather Your Friends And Watch Videos!</h1>
-                <p>Couch Time is a video sharing site to host and play videos to friends!</p>
+        <div className="card card-join">
+          <div className="card-icon">📱</div>
+          <h2>Join a room</h2>
+          <p>Got a room code from the host? Enter it to add videos to the queue.</p>
+          <form onSubmit={handleJoin} className="join-row">
+            <input
+              className="input code-input"
+              placeholder="ROOM CODE"
+              value={code}
+              maxLength={6}
+              onChange={(e) => setCode(e.target.value.toUpperCase())}
+            />
+            <button type="submit" className="btn btn-secondary">Join</button>
+          </form>
+        </div>
+      </div>
 
-                <div className="carousel">
-                    <div className={`carousel-image-wrapper ${fade ? "fade-in" : "fade-out"} `}>
-                        <img src={images[currentIndex]} alt={`Slide ${currentIndex}`} />
-                    </div>
-                </div>
-            </div>
-        </>
-    );
+      {error && <p className="error-text">{error}</p>}
+    </div>
+  );
 }
 
-export default Home
+export default Home;

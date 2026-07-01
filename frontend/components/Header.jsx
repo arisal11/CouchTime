@@ -1,22 +1,18 @@
-import {Link} from "react-router-dom"
-import '../src/styles/main.css'
+import { Link } from "react-router-dom";
 
-function Header({roomToken}){
-    return (
-        <header className="head">
-            <Link to ="/"><img src="./images/home-icon.png" alt="Home" className='home-icon' /></Link>
-            {roomToken ? (
-            <Link to={`/host?id=${roomToken}`}><button className='head-button'>Host</button></Link>
-            ) : (
-                <Link to ="/host"><button className='head-button'>Host</button></Link>
-            )}
-            {roomToken && (
-            <Link to={`/add?room=${roomToken}`}><button className='head-button'>Add</button></Link>
-            )}
-            {/* <Link to ="/add"><button className='head-button'>Add</button></Link> */}
-            <Link to ="/about"><button className='head-button'>About Us</button></Link>
-        </header>
-    );
+function Header() {
+  return (
+    <header className="head">
+      <Link to="/" className="brand">
+        <span className="brand-mark">📺</span>
+        <span className="brand-name">CouchTime</span>
+      </Link>
+      <nav className="nav">
+        <Link to="/" className="nav-link">Home</Link>
+        <Link to="/about" className="nav-link">About</Link>
+      </nav>
+    </header>
+  );
 }
 
 export default Header;

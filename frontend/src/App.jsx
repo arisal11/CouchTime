@@ -1,31 +1,27 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useState, useEffect } from 'react';
-import Host from '../routes/Host.jsx'
-import Add from '../routes/Add.jsx'
-import About from '../routes/About.jsx'
-import Home from '../routes/Home.jsx'
-import Head from '../components/Header.jsx'
-import Foot from '../components/Footer.jsx'
-import Hero from "../components/Hero.jsx";
+import Header from "../components/Header.jsx";
+import Footer from "../components/Footer.jsx";
+import Home from "../routes/Home.jsx";
+import Host from "../routes/Host.jsx";
+import Room from "../routes/Room.jsx";
+import About from "../routes/About.jsx";
 
 function App() {
-  const [roomToken, setRoomToken] = useState(
-    localStorage.getItem("roomToken") || ""
-  );
   return (
-    <>
     <Router>
-      <Head roomToken = {roomToken} />
-      <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/host" element={<Host setRoomToken={setRoomToken}/>}></Route>
-        <Route path="/add" element={<Add setRoomToken={roomToken}/>}></Route>
-        <Route path="/about" element={<About />}></Route>
-        <Route path="/host/:id" element={<Hero />}></Route>
-      </Routes>
-      <Foot />
+      <div className="app-shell">
+        <Header />
+        <main className="content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/host/:code" element={<Host />} />
+            <Route path="/room/:code" element={<Room />} />
+            <Route path="/about" element={<About />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
     </Router>
-    </>
   );
 }
 
