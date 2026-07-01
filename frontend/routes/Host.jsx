@@ -79,27 +79,66 @@ function Host() {
   const queue = state?.queue || [];
 
   return (
-    <div className="host-view">
+    <div className="living-room">
       <ReactionOverlay />
-      <div className="stage">
-        <div className="tv">
-          <div className="tv-screen">
-            {current ? (
-              <YouTubePlayer
-                ref={playerRef}
-                videoId={current.videoId}
-                onEnded={handleEnded}
-                onStateChange={handlePlayerState}
-              />
-            ) : (
-              <div className="tv-idle">
-                <div className="tv-idle-mark">📺</div>
-                <p>Queue is empty</p>
-                <span>Add a video from your phone to get started</span>
-              </div>
-            )}
+
+      {/* Decorative room backdrop: window + curtains, lamp, plant, rug */}
+      <div className="lr-scene" aria-hidden="true">
+        <div className="window-sky">
+          <span className="sky-sun" />
+          <span className="sky-moon" />
+          <span className="sky-star s1" />
+          <span className="sky-star s2" />
+          <span className="sky-star s3" />
+          <span className="sky-star s4" />
+        </div>
+        <div className="curtain-rod" />
+        <div className="curtain curtain-left" />
+        <div className="curtain curtain-right" />
+
+        <div className="floor-lamp">
+          <span className="lamp-shade" />
+          <span className="lamp-pole" />
+          <span className="lamp-base" />
+        </div>
+
+        <div className="plant">
+          <span className="leaf leaf-1" />
+          <span className="leaf leaf-2" />
+          <span className="leaf leaf-3" />
+          <span className="pot" />
+        </div>
+
+        <div className="rug" />
+      </div>
+
+      {/* The living room's centrepiece: the TV on its console */}
+      <div className="lr-stage">
+        <div className="tv-unit">
+          <div className="tv">
+            <div className="tv-screen">
+              {current ? (
+                <YouTubePlayer
+                  ref={playerRef}
+                  videoId={current.videoId}
+                  onEnded={handleEnded}
+                  onStateChange={handlePlayerState}
+                />
+              ) : (
+                <div className="tv-idle">
+                  <div className="tv-idle-mark">📺</div>
+                  <p>Queue is empty</p>
+                  <span>Add a video from your phone to get started</span>
+                </div>
+              )}
+            </div>
+            <span className="tv-brand">CouchTime</span>
           </div>
-          <div className="tv-stand" />
+          <div className="console">
+            <span className="console-panel" />
+            <span className="console-panel" />
+            <span className="console-panel" />
+          </div>
         </div>
 
         {current && (
@@ -123,23 +162,23 @@ function Host() {
         <ReactionBar code={code} />
       </div>
 
-      <aside className="side-panel">
-        <div className="join-box">
-          <div className="qr-wrap">
-            <QRCodeCanvas value={joinUrl} size={120} />
+      {/* Info hung on the wall like framed art + a shelf of what's up next */}
+      <aside className="lr-panel">
+        <div className="poster">
+          <div className="poster-qr">
+            <QRCodeCanvas value={joinUrl} size={116} />
           </div>
-          <div className="join-info">
-            <span className="join-label">Room code</span>
+          <div className="poster-info">
+            <span className="join-label">Scan to join</span>
             <span className="room-code">{code}</span>
-            <span className="join-hint">Scan or go to</span>
             <span className="join-url">{window.location.host}/room/{code}</span>
             <span className="member-count">
-              👥 {state?.memberCount ?? 0} in room
+              👥 {state?.memberCount ?? 0} watching
             </span>
           </div>
         </div>
 
-        <div className="queue-panel">
+        <div className="queue-panel shelf">
           <h3>Up next · {queue.length}</h3>
           {queue.length === 0 ? (
             <p className="queue-empty">Nothing queued yet.</p>
